@@ -8,8 +8,8 @@ License: GPL (>= 2)
 Encoding: UTF-8
 Authors@R: c(
 	person("Zhenyao", "Ye", role = "aut"),
-	person("Hongjie", "Ke", email = "kehj@terpmail.umd.edu", role = c("aut", "cre"),
-    	person("Tianzhou", "Ma", role = "aut")))
+	person("Hongjie", "Ke", email = "kehj@terpmail.umd.edu", role = c("aut", "cre")),
+    	person("Tianzhou", "Ma", role = "aut"))
 Author: Zhenyao Ye [aut],
     	Hongjie Ke [aut, cre],
     	Tianzhou Ma [aut].
@@ -20,5 +20,5 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
 NeedsCompilation: yes
 Packaged: 2020-12-25 3:01:18 UTC; kehongjie
-Date/Publication: 2020-07-14 3:01:18 UTC
+Date/Publication: 2020-12-25 3:01:18 UTC
 

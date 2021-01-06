@@ -5,6 +5,8 @@
 ##' FDR adjusted p-value (also known as q-value) after doing the BCMC.
 ##' Details can be found in the paper. 
 ##'
+##' @import parallel
+##' 
 ##' @param B: Number of permutations. The default is 100.
 ##' @param data.exp: The gene expression data. It should be a list in which
 ##' every element represents a study. Within each element (study), the data is
@@ -28,7 +30,15 @@
 ##' \item{qvalue}{A matrix of permutation q-values where each row is a gene. The 
 ##' first column is for up-regulated statistc, the second column is for down
 ##' -regulated statistic, and the third colum is for the dominant statistic.}
+##' 
 ##' @export
+##' @examples
+##' data("SimulDE")
+##' result_bcmc <- bcmc(data.exp=SimulDE$express, data.clin=SimulDE$clin)
+##' result_perm <- perm.bcmc(B=5, data.exp=SimulDE$express, data.clin=SimulDE$clin, 
+##'                          res.bcmc=result_bcmc, parallel=FALSE)
+##' names(result_perm)
+##' head(result_perm$pvalue)
 
 
 perm.bcmc <- function(B=100, data.exp, data.clin, res.bcmc, 

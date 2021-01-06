@@ -5,6 +5,12 @@
 ##' then implement the meta-analysis method BCMC (Biomarker Categorization
 ##' in Meta-analysis by Concordance) for biomarker detection and categorization.
 ##'
+##' @import Biobase
+##' @import impute
+##' @import stringr
+##' @import gtools
+##' @import limma
+##' 
 ##' @param data.exp: The gene expression data. It should be a list in which
 ##' every element represents a study. Within each element (study), the data is
 ##' supposed to be matrix where each row is a gene and each column is a sample.
@@ -42,7 +48,14 @@
 ##' is a gene. The first column is for up-regulated pattern, the second column
 ##' is for down-regulated pattern, and the third column is the larger one of the
 ##' previous two statistics. See the paper for more details.}
+##' 
 ##' @export
+##' @examples
+##' data("SimulDE")
+##' result_bcmc <- bcmc(data.exp=SimulDE$express, data.clin=SimulDE$clin)
+##' names(result_bcmc)
+##' head(result_bcmc$Rg)
+##' head(result_bcmc$pos.wp)
 
 
 bcmc <- function(data.exp, data.clin, meta.de=TRUE, de.lfc=NULL, de.pval=NULL) {
@@ -108,7 +121,7 @@ bcmc <- function(data.exp, data.clin, meta.de=TRUE, de.lfc=NULL, de.pval=NULL) {
   #                                  which.pomax=simTw_which.pomax) ## now a G*(2^K+2) matrix
   # Twpos_res <- data.frame(pomax=simTw_posmax, which.pomax=simTw_which.pomax) ## a G*2 matrix of max Tw+ information
   Twpos_res <- matrix(NA, G, K+1) ## G*(K+1) matrix of max Tw+ and argmax weight
-  colnames(Twpos_res) <- c("posmax", paste("poswp.", 1:K, sep=""))
+  colnames(Twpos_res) <- c("posmax", paste("study", 1:K, sep=""))
   Twpos_res[,1] <- simTw_posmax
   for (i in 1:G){
     # sim.data_posTw[i,c(35:39)]<-simW_random[sim.data_posTw$which.pomax[i], ]
@@ -123,7 +136,7 @@ bcmc <- function(data.exp, data.clin, meta.de=TRUE, de.lfc=NULL, de.pval=NULL) {
   #                                    which.nemax=simTw_which.nemax)
   # Twneg_res <- data.frame(nemax=simTw_negmax, which.nemax=simTw_which.nemax) ## a G*2 matrix of max Tw- information
   Twneg_res <- matrix(NA, G, K+1) ## G*(K+1) matrix of max Tw- and argmax weight
-  colnames(Twneg_res) <- c("negmax", paste("negwp.", 1:K, sep=""))
+  colnames(Twneg_res) <- c("negmax", paste("study", 1:K, sep=""))
   Twneg_res[,1] <- simTw_negmax
   for (i in 1:G){
     # sim.data_negTw[i,c(35:39)]<-simW_random[sim.data_negTw$which.nemax[i],c(1:5)]
@@ -133,7 +146,7 @@ bcmc <- function(data.exp, data.clin, meta.de=TRUE, de.lfc=NULL, de.pval=NULL) {
 
   ## compare Tw+ and Tw-
   Twmax_res <- matrix(NA, G, K+1) ## G*(K+1) matrix of max(Tw+,Tw-) and argmax weight
-  colnames(Twmax_res) <- c("pnmax", paste("pnwp.", 1:K, sep=""))
+  colnames(Twmax_res) <- c("pnmax", paste("study", 1:K, sep=""))
   for (i in 1:G){
     if (Twpos_res[i,1] > Twneg_res[i,1]) {
       Twmax_res[i,] <- Twpos_res[i,]

@@ -54,14 +54,23 @@
 ##' \item{qvalue}{A matrix of permutation q-values where each row is a gene. The 
 ##' first column is for up-regulated statistc, the second column is for down
 ##' -regulated statistic, and the third colum is for the dominant statistic.}
+##' 
 ##' @export
+##' @examples
+##' data("SimulDE")
+##' result_comp <- comp.bcmc(data.exp=SimulDE$express, data.clin=SimulDE$clin, 
+##'                          B=5, parallel=FALSE)
+##' names(result_comp)
+##' head(result_comp$Rg)
+##' head(result_comp$pos.wp)
+##' head(result_comp$pvalue)
 
 
 comp.bcmc <- function(data.exp, data.clin, meta.de=TRUE, de.lfc=NULL, de.pval=NULL, 
                      B=100, parallel=FALSE, num.cores=NULL) {
   res_bcmc <- bcmc(data.exp=data.exp, data.clin=data.clin, meta.de=meta.de, de.lfc=de.lfc, 
                    de.pval=de.pval)
-  res_perm <- perm.bcmc(B=B, data.exp=data.exp, data.clin=data.clin, res.bmc=res_bcmc,
+  res_perm <- perm.bcmc(B=B, data.exp=data.exp, data.clin=data.clin, res.bcmc=res_bcmc,
                         parallel=parallel, num.cores=num.cores)
   return(c(res_bcmc, res_perm))
 }

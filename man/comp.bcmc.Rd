@@ -80,3 +80,12 @@ implement the meta-analysis method BCMC for biomarker detection and categorizati
 by \code{bcmc} function, and calculate the permutation-based p-value and q-value
 using \code{perm.bcmc} function.
 }
+\examples{
+data("SimulDE")
+result_comp <- comp.bcmc(data.exp=SimulDE$express, data.clin=SimulDE$clin, 
+                         B=5, parallel=FALSE)
+names(result_comp)
+head(result_comp$Rg)
+head(result_comp$pos.wp)
+head(result_comp$pvalue)
+}

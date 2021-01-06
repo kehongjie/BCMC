@@ -50,3 +50,11 @@ This function use a permutation-based test to calculate the p-value and
 FDR adjusted p-value (also known as q-value) after doing the BCMC.
 Details can be found in the paper.
 }
+\examples{
+data("SimulDE")
+result_bcmc <- bcmc(data.exp=SimulDE$express, data.clin=SimulDE$clin)
+result_perm <- perm.bcmc(B=5, data.exp=SimulDE$express, data.clin=SimulDE$clin, 
+                         res.bcmc=result_bcmc, parallel=FALSE)
+names(result_perm)
+head(result_perm$pvalue)
+}

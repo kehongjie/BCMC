@@ -56,3 +56,10 @@ This function will first run the \code{MetaDE} to perform DE analysis, and
 then implement the meta-analysis method BCMC (Biomarker Categorization
 in Meta-analysis by Concordance) for biomarker detection and categorization.
 }
+\examples{
+data("SimulDE")
+result_bcmc <- bcmc(data.exp=SimulDE$express, data.clin=SimulDE$clin)
+names(result_bcmc)
+head(result_bcmc$Rg)
+head(result_bcmc$pos.wp)
+}
