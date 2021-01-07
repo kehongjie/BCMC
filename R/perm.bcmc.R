@@ -61,7 +61,7 @@ perm.bcmc <- function(B=100, data.exp, data.clin, res.bcmc,
   }
   
   if (parallel==TRUE) {
-    res_perm <- mcmapply(FUN = bcmc, data.exp=permB_list_data, data.clin=permB_list_label, 
+    res_perm <- parallel::mcmapply(FUN = bcmc, data.exp=permB_list_data, data.clin=permB_list_label, 
                          mc.cores = numCores, SIMPLIFY = F)
   } else {
     res_perm <- mapply(FUN = bcmc, data.exp=permB_list_data, data.clin=permB_list_label, 

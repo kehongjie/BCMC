@@ -6,7 +6,7 @@ rep.row <- function(x,n) {
 
 ## FUNCTION: extract numbers from a string
 numextract <- function(string) { 
-  str_extract(string, "\\-*\\d+\\.*\\d*")
+  stringr::str_extract(string, "\\-*\\d+\\.*\\d*")
 } 
 
 

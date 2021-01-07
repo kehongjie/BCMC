@@ -59,7 +59,16 @@
 
 
 bcmc <- function(data.exp, data.clin, meta.de=TRUE, de.lfc=NULL, de.pval=NULL) {
-
+  
+  if (!requireNamespace("gtools", quietly = TRUE)) {
+    stop("Package \"gtools\" needed for this function to work. Please install it.",
+         call. = FALSE)
+  }
+  if (!requireNamespace("stringr", quietly = TRUE)) {
+    stop("Package \"stringr\" needed for this function to work. Please install it.",
+         call. = FALSE)
+  }
+  
   K <- length(data.exp)
   n <- ncol(data.exp[[1]])
   G <- nrow(data.exp[[1]])
@@ -82,7 +91,7 @@ bcmc <- function(data.exp, data.clin, meta.de=TRUE, de.lfc=NULL, de.pval=NULL) {
   ##### run BCMC #####
   sim_w <- c(0,1)
   ## 2^K combination of 0/1
-  simW_random <- data.matrix(permutations(n=length(sim_w), r=K, v=sim_w, repeats.allowed = T))
+  simW_random <- data.matrix(gtools::permutations(n=length(sim_w), r=K, v=sim_w, repeats.allowed = T))
 
   ## all possible weight patterns
   simw <- vector("list", 2^K) ## list of combintation 2^K, each is a matrix of G*K
