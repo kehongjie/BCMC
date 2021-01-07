@@ -31,7 +31,7 @@ library(BCMC)
 
 # Data and Examples
 
-This package also includes a simulated DE data (`SimulDE`) and a TCGA Pan Gynecologic cancer data (`PanGyn`).  Here is a toy example of running the `comp.bcmc` function in the simulated data:
+This package also includes a simulated DE data (`SimulDE`) and a TCGA Pan Gynecologic cancer data (`PanGyn`).  Here is a toy example of running the `comp.bcmc` function on the simulated data:
 
 ```R
 data("SimulDE")
