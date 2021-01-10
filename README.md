@@ -31,7 +31,14 @@ library(BCMC)
 
 # Data and Examples
 
-This package also includes a simulated DE data (`SimulDE`) and a TCGA Pan Gynecologic cancer data (`PanGyn`).  Here is a toy example of running the `comp.bcmc` function on the simulated data:
+This package also includes three data sets under the */data* folder:
+
+- `SimulDE.RData`: A simulated DE data with 2000 genes and 5 studies. 
+- `PanGyn.RData`: A TCGA Pan Gynecologic cancer data with coding genes only. 
+- ` PanKidney.RData`: A TCGA Pan Kidney cancer data that include mRNA, miRNA as well as lncRNA.
+
+
+Here is a toy example of running the `comp.bcmc` function on the simulated data:
 
 ```R
 data("SimulDE")
